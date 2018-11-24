@@ -25,6 +25,8 @@ test_http_env() {
 	handler_type="$1"
 	request_body="$2"
 	shift
+	(rm -f act.out || true) &&
+	(rm -f act.err || true) &&
 	env \
 		CONTENT_TYPE="application/x-git-$handler_type-pack-request" \
 		QUERY_STRING="/repo.git/git-$handler_type-pack" \
@@ -158,6 +160,8 @@ test_expect_success 'CONTENT_LENGTH overflow ssite_t' '
 '
 
 test_expect_success 'empty CONTENT_LENGTH' '
+	(rm -f act.out || true) &&
+	(rm -f act.err || true) &&
 	env \
 		QUERY_STRING="service=git-receive-pack" \
 		PATH_TRANSLATED="$PWD"/.git/info/refs \
