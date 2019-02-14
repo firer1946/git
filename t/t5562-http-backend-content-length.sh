@@ -141,7 +141,7 @@ test_expect_success GZIP 'push gzipped empty' '
 	! verify_http_result "200 OK"
 '
 
-pid123=$$; (sleep 60; cat err; kill -9 $pid123) &
+pid123=$$; ps -ax; echo "pid: $pid123"; (sleep 10; cat err; ps -ax; kill -9 $pid123) &
 set -o
 
 test_expect_success 'CONTENT_LENGTH overflow ssite_t' '
