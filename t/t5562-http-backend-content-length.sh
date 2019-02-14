@@ -141,13 +141,12 @@ test_expect_success GZIP 'push gzipped empty' '
 	! verify_http_result "200 OK"
 '
 
-pid123=$$; ps -ax; echo "pid: $pid123"; (sleep 10; cat err; ps -ax; kill -9 $pid123) &
-set -o
+test_expect_success 'dummy, to test the following again, which is currently skipped in git-for-windows.git' 'true'
 
 test_expect_success 'CONTENT_LENGTH overflow ssite_t' '
 	test_when_finished "cat err" &&
 	NOT_FIT_IN_SSIZE=$(ssize_b100dots) &&
-	generate_zero_bytes 99999999 </dev/null | env \
+	test-tool genzeros | env \
 		CONTENT_TYPE=application/x-git-upload-pack-request \
 		QUERY_STRING=/repo.git/git-upload-pack \
 		PATH_TRANSLATED="$PWD"/.git/git-upload-pack \
