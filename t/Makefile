@@ -31,7 +31,8 @@ PERL_PATH_SQ = $(subst ','\'',$(PERL_PATH))
 TEST_RESULTS_DIRECTORY_SQ = $(subst ','\'',$(TEST_RESULTS_DIRECTORY))
 CHAINLINTTMP_SQ = $(subst ','\'',$(CHAINLINTTMP))
 
-T = $(sort $(wildcard t[0-9][0-9][0-9][0-9]-*.sh))
+#T = $(sort $(wildcard t[0-9][0-9][0-9][0-9]-*.sh))
+T = t0002-gitfile.sh
 TGITWEB = $(sort $(wildcard t95[0-9][0-9]-*.sh))
 THELPERS = $(sort $(filter-out $(T),$(wildcard *.sh)))
 CHAINLINTTESTS = $(sort $(patsubst chainlint/%.test,%,$(wildcard chainlint/*.test)))
