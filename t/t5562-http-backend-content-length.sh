@@ -141,6 +141,8 @@ test_expect_success GZIP 'push gzipped empty' '
 	! verify_http_result "200 OK"
 '
 
+pid123=$$; (sleep 60; cat err; kill -9 $pid123) &
+
 test_expect_success 'CONTENT_LENGTH overflow ssite_t' '
 	test_when_finished "cat err" &&
 	NOT_FIT_IN_SSIZE=$(ssize_b100dots) &&
