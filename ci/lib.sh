@@ -128,7 +128,7 @@ then
 
 	BREW_INSTALL_PACKAGES=gcc@8
 	export GIT_PROVE_OPTS="--timer --jobs 10 --state=failed,slow,save"
-	export GIT_TEST_OPTS="--verbose-log -x --write-junit-xml"
+	export GIT_TEST_OPTS="-i -v -x"
 	MAKEFLAGS="$MAKEFLAGS --jobs=10"
 	test windows_nt != "$CI_OS_NAME" ||
 	GIT_TEST_OPTS="--no-chain-lint --no-bin-wrappers $GIT_TEST_OPTS"
@@ -150,7 +150,7 @@ then
 fi
 
 export DEVELOPER=1
-export DEFAULT_TEST_TARGET=prove
+#export DEFAULT_TEST_TARGET=prove
 export GIT_TEST_CLONE_2GB=YesPlease
 
 case "$jobname" in
