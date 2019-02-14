@@ -355,6 +355,7 @@ static ssize_t get_content_length(void)
 
 	if (str && *str && !git_parse_ssize_t(str, &val))
 		die("failed to parse CONTENT_LENGTH: %s", str);
+warning("did *NOT* fail to parse CONTENT_LENGTH: %s (val: %"PRIdMAX")", str, (intmax_t)val);
 	return val;
 }
 
