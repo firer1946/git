@@ -142,6 +142,7 @@ test_expect_success GZIP 'push gzipped empty' '
 '
 
 test_expect_success 'CONTENT_LENGTH overflow ssite_t' '
+	test_when_finished "cat err" &&
 	NOT_FIT_IN_SSIZE=$(ssize_b100dots) &&
 	generate_zero_bytes infinity  | env \
 		CONTENT_TYPE=application/x-git-upload-pack-request \
