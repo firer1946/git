@@ -353,9 +353,10 @@ static ssize_t get_content_length(void)
 	ssize_t val = -1;
 	const char *str = getenv("CONTENT_LENGTH");
 
+warning("str: %s", str);
 	if (str && *str && !git_parse_ssize_t(str, &val))
 		die("failed to parse CONTENT_LENGTH: %s", str);
-warning("did *NOT* fail to parse CONTENT_LENGTH: %s (val: %"PRIdMAX")", str, (intmax_t)val);
+warning("did *NOT* fail to parse CONTENT_LENGTH: %s (val: %"PRIdMAX")", str, (intmax_t)val); fflush(stderr);
 	return val;
 }
 
@@ -465,7 +466,8 @@ static void run_service(const char **argv, int buffer_input)
 	const char *host = getenv("REMOTE_ADDR");
 	int gzipped_request = 0;
 	struct child_process cld = CHILD_PROCESS_INIT;
-	ssize_t req_len = get_content_length();
+	ssize_t req_len;
+warning("about to get content length"); req_len = get_content_length();
 
 	if (encoding && !strcmp(encoding, "gzip"))
 		gzipped_request = 1;
@@ -551,6 +553,7 @@ static void get_info_refs(struct strbuf *hdr, char *arg)
 		}
 
 		argv[0] = svc->name;
+warning("%s:%d: run_service", __FILE__, __LINE__);
 		run_service(argv, 0);
 
 	} else {
@@ -653,6 +656,7 @@ static void service_rpc(struct strbuf *hdr, char *service_name)
 	end_headers(hdr);
 
 	argv[0] = svc->name;
+warning("%s:%d: run_service", __FILE__, __LINE__);
 	run_service(argv, svc->buffer_input);
 	strbuf_release(&buf);
 }
